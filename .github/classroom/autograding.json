@@ -1,0 +1,28 @@
+{
+  "tests": [
+    {
+      "name": "Q1 Cow Sightings",
+      "setup": "",
+      "run": "(cd java && javac *.java && java Question1_CowSightings) || (cd python && python3 question1_cow_sightings.py) || (cd cpp && g++ -std=c++17 -O2 question1_cow_sightings.cpp -o q1 && ./q1)",
+      "timeout": 120,
+      "points": 10,
+      "comparison": "exact"
+    },
+    {
+      "name": "Q2 Two Sum Bounded",
+      "setup": "",
+      "run": "(cd java && javac *.java && java Question2_TwoSumBounded) || (cd python && python3 question2_two_sum_bounded.py) || (cd cpp && g++ -std=c++17 -O2 question2_two_sum_bounded.cpp -o q2 && ./q2)",
+      "timeout": 120,
+      "points": 10,
+      "comparison": "exact"
+    },
+    {
+      "name": "Q3 Largest K With Negative",
+      "setup": "",
+      "run": "(cd java && javac *.java && java Question3_LargestKWithNegative) || (cd python && python3 question3_largest_k_with_negative.py) || (cd cpp && g++ -std=c++17 -O2 question3_largest_k_with_negative.cpp -o q3 && ./q3)",
+      "timeout": 120,
+      "points": 10,
+      "comparison": "exact"
+    }
+  ]
+}

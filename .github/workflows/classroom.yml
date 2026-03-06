@@ -1,0 +1,65 @@
+name: GitHub Classroom Workflow
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Q1 Cow Sightings
+        id: q1
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'Q1 Cow Sightings'
+          command: '(cd java && javac *.java && java Question1_CowSightings) || (cd python && python3 question1_cow_sightings.py) || (cd cpp && g++ -std=c++17 -O2 question1_cow_sightings.cpp -o q1 && ./q1)'
+          timeout: '120'
+          max-score: '10'
+
+      - name: Q2 Two Sum Bounded
+        id: q2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'Q2 Two Sum Bounded'
+          command: '(cd java && javac *.java && java Question2_TwoSumBounded) || (cd python && python3 question2_two_sum_bounded.py) || (cd cpp && g++ -std=c++17 -O2 question2_two_sum_bounded.cpp -o q2 && ./q2)'
+          timeout: '120'
+          max-score: '10'
+
+      - name: Q3 Largest K With Negative
+        id: q3
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'Q3 Largest K With Negative'
+          command: '(cd java && javac *.java && java Question3_LargestKWithNegative) || (cd python && python3 question3_largest_k_with_negative.py) || (cd cpp && g++ -std=c++17 -O2 question3_largest_k_with_negative.cpp -o q3 && ./q3)'
+          timeout: '120'
+          max-score: '10'
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          Q1_RESULTS: "${{steps.q1.outputs.result}}"
+          Q2_RESULTS: "${{steps.q2.outputs.result}}"
+          Q3_RESULTS: "${{steps.q3.outputs.result}}"
+        with:
+          runners: q1,q2,q3
